@@ -110,3 +110,5 @@ it('RandomWalk can be started', async () => {
   expect(randomWalk.start()).to.eql(undefined);
 });
 ```
+
+Normally the private methods are called from public methods, so by writing tests for public methods which call private methods you can indirectly test those private methods.
