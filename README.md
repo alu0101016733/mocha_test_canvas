@@ -4,6 +4,10 @@
 ##### Author: Thaddäus Haase
 ##### E-Mail: alu0101016733@ull.edu.es
 
+## IMPORTANT:
+
+If your code, be it class, function or else, looks for variables in a certain scope. Then you should provide it in that scope, in this example I will save it in the global Object to have access to it from anywhere.
+
 ## Needed packages:
 
 [jsdom](https://www.npmjs.com/package/jsdom) : jsdom is a pure-JavaScript implementation of many web standards, notably the WHATWG DOM and HTML Standards, for use with [Node.js](https://nodejs.org/).  
@@ -31,7 +35,7 @@ import { RandomWalk } from 'random-walk.js'; // my class to test
 import { JSDOM } from 'jsdom';
 ```
 
-We don't need to import canvas sine Node.js has access to it.
+We don't need to import canvas since Node.js has access to it.
 
 ### Test Setup
 
@@ -40,9 +44,9 @@ Since jsdom or file read can need some time we will make use of the async code t
 
 #### Providing functions that are not defined in imports
 
-When a function is not defined in the local environment, Javascript will start to look up the dependency tree to check if it is defined in another location. We will make use of that and simply provide a function with the same behavior like the function in out code should have.
+When a function is not defined in the local scope, Javascript will start to look up the dependency tree to check if it is defined in another location. We will make use of that and simply provide a function with the same behavior like the function in out code should have.
 
-For an example I will provide requestAnimationFrame for my code in the global environment:
+For an example I will provide requestAnimationFrame for my code in the global Onject (scope):
 
 First we take a look at the documentation ([requestAnimationFrame](https://developer.mozilla.org/es/docs/Web/API/Window/requestAnimationFrame)) and then we just mirror the behavior modified to our needs for our code.
 
@@ -61,7 +65,7 @@ Example:
   }
   /*
   * providing a function to simulate requestAnimationFrame time passing
-  * in the global environment. The behavior is the same as the 
+  * in the global scope. The behavior is the same as the 
   * requestAnimationFrame() from:
   * https://developer.mozilla.org/es/docs/Web/API/Window/requestAnimationFrame
   */
@@ -74,7 +78,7 @@ We could to this for any function or object that we need, but since there are li
 
 Sometimes when we want to test code that requires for example working with files we have to be sure that the file is loaded before continuing testing, luckily mocha provides this posibility for us.
 
-As en example I will be using a beforeEach() test function:
+As en example I will be using a beforeEach() test function. Note that document is provided in the global scope since our class will use document and look for it there when ot doesn't find it any closer.
 
 ```javascript
 /*
