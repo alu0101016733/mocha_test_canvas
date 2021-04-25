@@ -44,9 +44,9 @@ Since jsdom or file read can need some time we will make use of the async code t
 
 #### Providing functions that are not defined in imports
 
-When a function is not defined in the local scope, Javascript will start to look up the dependency tree to check if it is defined in another location. We will make use of that and simply provide a function with the same behavior like the function in out code should have.
+When a function is not defined in the local scope, Javascript will start to look up the dependency tree to check if it is defined in another location. We will make use of that and simply provide a function with the same behavior like the function in our code expects.
 
-For an example I will provide requestAnimationFrame for my code in the global Onject (scope):
+For an example I will provide requestAnimationFrame for my code in the global Object (scope):
 
 First we take a look at the documentation ([requestAnimationFrame](https://developer.mozilla.org/es/docs/Web/API/Window/requestAnimationFrame)) and then we just mirror the behavior modified to our needs for our code.
 
@@ -78,7 +78,7 @@ We could to this for any function or object that we need, but since there are li
 
 Sometimes when we want to test code that requires for example working with files we have to be sure that the file is loaded before continuing testing, luckily mocha provides this posibility for us.
 
-As en example I will be using a beforeEach() test function. Note that document is provided in the global scope since our class will use document and look for it there when ot doesn't find it any closer.
+As en example I will be using a beforeEach() test function. Note that document is provided in the global scope since our class will use document and look for it there when it doesn't find it any closer.
 
 ```javascript
 /*
